@@ -74,7 +74,7 @@ app.use((_, req, res, next) => {
 // 防止資料庫受攻擊用，將 mongoDB 的金錢符號去掉（要在 express.json() 後）
 app.use(MongoSanitize())
 
-app.use('./users', routeUsers)
+app.use('/users', routeUsers)
 
 // 如果上面所有問題跑完之後把沒擋到的，統一回覆 NOT_FOUND ＊是全部
 app.all('*', (req, res) => {
