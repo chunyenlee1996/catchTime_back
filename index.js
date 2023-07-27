@@ -12,8 +12,10 @@ import MongoSanitize from 'express-mongo-sanitize'
 import cors from 'cors'
 // 限制流量的套件
 import { rateLimit } from 'express-rate-limit'
-
+// 拉 routes的users資料進來
 import routeUsers from './routes/users.js'
+// 引入登入驗證程式碼
+import './passport/passport.js'
 
 // 處理 middleware 錯誤的方式，就是將錯誤處理接在每個 middleware 後面
 
