@@ -30,6 +30,9 @@ export const create = async (req, res) => {
   }
 }
 // 登入
+// 這邊 login 跟 getProfile 取的東西很像的原因在
+// getProfile 是如果有重新整理的話，利用 pinia 存放在 persist 裡的 token 發請求取得放在 getProfile 的資料
+// 所以 login 跟 getProfile 才會只有差 token 資訊
 export const login = async (req, res) => {
   try {
     // jwt.sign(保存的資料, SECRET, 設定)
@@ -80,9 +83,11 @@ export const logout = async (req, res) => {
 export const extend = async (req, res) => {
   try {
     // findIndex(ex=>ex>3) 尋找陣列符合測試函式(ex=>ex>3)的元素，並返回索引，會從[0]查
-    // 下方這行表示在 tokens[] 中找到符合 token 的索引，放進 idx 中
+    // 下方這行表示在 tokens[] 中找到符合 token 的索引，放進 idx 中(找現在使用的token是陣列中的第幾個)
     const idx = req.user.tokens.findIndex(token => token === req.token)
+    // 這行跟上面的 token 一樣，要牽一個新的 jwt 出來
     const token = jwt.sign({ _id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '7 days' })
+    // 換陣列的索引內容，把新的token放到現在使用的那個陣列位置中
     req.user.tokens[idx] = token
     await req.user.save()
     res.status(StatusCodes.OK).json({
