@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 // 創建
 export const create = async (req, res) => {
   try {
+    // 如果前端跟你設定儲存資料的欄位名字一樣的話可以直接丟進去，不一樣的話在一個一個寫
     await users.create(req.body)
     res.status(StatusCodes.OK).json({
       success: true,

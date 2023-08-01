@@ -19,16 +19,17 @@ const schema = new mongoose.Schema({
     ref: 'users',
     default: []
   },
+  name: {
+    type: String,
+    required: [true, '沒有作品名稱']
+  },
   imgURL: {
     type: String,
     required: [true, '沒有圖片']
   },
   content: {
-    type: String
-  },
-  date: {
-    type: Date,
-    required: [true, '必須要有時間']
+    type: String,
+    required: [true, '沒有內容']
   },
   messageBoard: {
     type: [messageBoardSchema],

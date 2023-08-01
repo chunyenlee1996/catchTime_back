@@ -18,6 +18,7 @@ const upload = multer({
   // 過濾前端送過來的檔案
   fileFilter (req, file, callback) {
     // callback(錯誤, 是否允許)
+    // mimetype 是一種檔案類型，要更改可以到 multer 上看有哪些可以改
     if (['image/jpg', 'image/jpeg', 'image/png'].includes(file.mimetype)) {
       callback(null, true)
     } else {
@@ -27,7 +28,7 @@ const upload = multer({
   },
   limits: {
     // 限制檔案大小，超過會出現 LIMIT_FILE_SIZE 錯誤
-    fileSize: 1024 * 1024
+    fileSize: 2560 * 1080
   }
 })
 

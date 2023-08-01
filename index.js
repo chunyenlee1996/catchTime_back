@@ -12,10 +12,12 @@ import MongoSanitize from 'express-mongo-sanitize'
 import cors from 'cors'
 // 限制流量的套件
 import { rateLimit } from 'express-rate-limit'
-// 拉 routes的users資料進來
-import routeUsers from './routes/users.js'
 // 引入登入驗證程式碼
 import './passport/passport.js'
+// 拉 routes 的 users 資料進來
+import routeUsers from './routes/users.js'
+// 拉 routes 的 images 資料進來
+import images from './routes/images.js'
 
 // 處理 middleware 錯誤的方式，就是將錯誤處理接在每個 middleware 後面
 
@@ -77,6 +79,8 @@ app.use((_, req, res, next) => {
 app.use(MongoSanitize())
 
 app.use('/users', routeUsers)
+
+app.use('/images', images)
 
 // 如果上面所有問題跑完之後把沒擋到的，統一回覆 NOT_FOUND ＊是全部
 app.all('*', (req, res) => {
