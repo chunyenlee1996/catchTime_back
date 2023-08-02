@@ -52,7 +52,8 @@ export const login = async (req, res) => {
         email: req.user.email,
         phoneNumber: req.user.phoneNumber,
         role: req.user.role,
-        avatar: req.user.avatar
+        avatar: req.user.avatar,
+        userId: req.user._id
       }
     })
   } catch (error) {
@@ -115,7 +116,8 @@ export const getProfile = async (req, res) => {
         email: req.user.email,
         phoneNumber: req.user.phoneNumber,
         role: req.user.role,
-        avatar: req.user.avatar
+        avatar: req.user.avatar,
+        userId: req.user._id
       }
     })
   } catch (error) {
