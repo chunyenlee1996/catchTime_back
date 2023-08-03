@@ -4,11 +4,12 @@ import { StatusCodes } from 'http-status-codes'
 
 export const create = async (req, res) => {
   try {
+    console.log(req)
     const result = await images.create({
       userId: req.user._id,
       name: req.body.name,
       imgURL: req.file.path,
-      them: req.body.them,
+      theme: req.body.formTheme,
       content: req.body.content
     })
     res.status(StatusCodes.OK).json({

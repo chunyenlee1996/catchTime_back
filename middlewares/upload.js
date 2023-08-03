@@ -28,12 +28,12 @@ const upload = multer({
   },
   limits: {
     // 限制檔案大小，超過會出現 LIMIT_FILE_SIZE 錯誤
-    fileSize: 2560 * 1080
+    fileSize: 5464 * 8192
   }
 })
 
 export default (req, res, next) => {
-  upload.single('image')(req, res, error => {
+  upload.single('imgURL')(req, res, error => {
     if (error instanceof multer.MulterError) {
       // 處理上傳錯誤
       let message = '上傳錯誤'
