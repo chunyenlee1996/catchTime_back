@@ -4,7 +4,6 @@ import { StatusCodes } from 'http-status-codes'
 
 export const create = async (req, res) => {
   try {
-    console.log(req)
     const result = await images.create({
       userId: req.user._id,
       name: req.body.name,

@@ -8,7 +8,7 @@ const router = express.Router()
 
 // 中間 contentType 驗證請求格式對不對
 router.post('/', auth.jwt, contentType('multipart/form-data'), upload, create)
-router.get('/all', auth.jwt, getAll)
+router.get('/all', getAll)
 router.delete('/:id', del)
 router.patch('/:id', auth.jwt, contentType('multipart/form-data'), upload, edit)
 export default router
