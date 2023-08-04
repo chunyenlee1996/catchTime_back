@@ -6,6 +6,7 @@ export const create = async (req, res) => {
   try {
     const result = await images.create({
       userId: req.user._id,
+      userName: req.user.userName,
       name: req.body.name,
       imgURL: req.file.path,
       theme: req.body.formTheme,
@@ -33,7 +34,10 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const result = await images.find()
+    // .find( mongoDB 資料庫的 key : key 的 value )
+    // 下面那行.find裡面的 new RegExp() 是正則表達式的語法，console.log()留在下面可以看
+    const result = await images.find({ theme: new RegExp(req.query.search, 'i') })
+    // console.log({ name: new RegExp(req.query.search, 'i') })
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',

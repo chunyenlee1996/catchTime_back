@@ -10,6 +10,11 @@ const messageBoardSchema = new mongoose.Schema({
   message: {
     type: String,
     required: [true, '沒有留言']
+  },
+  userName: {
+    type: String,
+    ref: 'users',
+    required: [true, '沒有名稱']
   }
 }, { versionKey: false })
 
@@ -17,7 +22,12 @@ const schema = new mongoose.Schema({
   userId: {
     type: mongoose.ObjectId,
     ref: 'users',
-    default: []
+    required: [true, '作者_id']
+  },
+  userName: {
+    type: String,
+    ref: 'users',
+    required: [true, '沒有作者']
   },
   name: {
     type: String,
