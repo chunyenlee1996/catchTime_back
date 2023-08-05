@@ -35,8 +35,15 @@ export const create = async (req, res) => {
 export const getAll = async (req, res) => {
   try {
     // .find( mongoDB 資料庫的 key : key 的 value )
-    // 下面那行.find裡面的 new RegExp() 是正則表達式的語法，console.log()留在下面可以看
-    const result = await images.find({ theme: new RegExp(req.query.search, 'i') })
+    const result = await images.find({
+      // $or:[] 這個是其中一個的語法，要是陣列，裡面物件表示
+      $or: [
+        // new RegExp() 是正則表達式的語法，console.log()留在下面可以看
+        { theme: new RegExp(req.query.search, 'i') },
+        { userName: new RegExp(req.query.search, 'i') },
+        { name: new RegExp(req.query.search, 'i') }
+      ]
+    })
     // console.log({ name: new RegExp(req.query.search, 'i') })
     res.status(StatusCodes.OK).json({
       success: true,
