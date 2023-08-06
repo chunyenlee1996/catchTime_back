@@ -57,6 +57,22 @@ export const getAll = async (req, res) => {
     })
   }
 }
+export const getUserImage = async (req, res) => {
+  try {
+    // .find( mongoDB 資料庫的 key : key 的 value )
+    const result = await images.find({ userId: req.query.search })
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '',
+      result
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: '使用者圖片取得發生錯誤'
+    })
+  }
+}
 
 export const del = async (req, res) => {
   try {
@@ -65,7 +81,9 @@ export const del = async (req, res) => {
     // }
     // findOneAndDelete()這個語法可以直接下條件查詢有沒有這個東西並刪除(查 mongoose model api)
     // req.params.id 中間的 params 代表是查document(查 mongoose document api)，路由就要接('/:id')
-    const result = await images.findOneAndDelete({ _id: req.params.id, userId: req.user._id })
+    // 下方這行是代表連使用者都要是req.user._id
+    // const result = await images.findOneAndDelete({ _id: req.params.id, userId: req.user._id })
+    const result = await images.findOneAndDelete({ _id: req.params.id })
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
