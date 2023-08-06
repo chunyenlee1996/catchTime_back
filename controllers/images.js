@@ -103,7 +103,7 @@ export const edit = async (req, res) => {
       name: req.body.name,
       // 可能更新不會傳圖片過來，所以要加?
       imgURL: req.file?.path,
-      them: req.body.them,
+      theme: req.body.formTheme,
       content: req.body.content
       // 設定 new: true 他才會傳新的東西過來，runValidators: true 驗證才會執行
     }, { new: true, runValidators: true })
@@ -114,6 +114,7 @@ export const edit = async (req, res) => {
         result
       })
     }
+    console.table(req.body)
   } catch (error) {
     if (error.name === 'ValidationError') {
       res.status(StatusCodes.BAD_REQUEST).json({
