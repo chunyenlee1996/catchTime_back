@@ -18,6 +18,8 @@ import './passport/passport.js'
 import routeUsers from './routes/users.js'
 // 拉 routes 的 images 資料進來
 import images from './routes/images.js'
+// 拉 routes 的 PTTs 資料進來
+import PTTs from './routes/ptt.js'
 
 // 處理 middleware 錯誤的方式，就是將錯誤處理接在每個 middleware 後面
 
@@ -81,6 +83,8 @@ app.use(MongoSanitize())
 app.use('/users', routeUsers)
 
 app.use('/images', images)
+
+app.use('/PTTs', PTTs)
 
 // 如果上面所有問題跑完之後把沒擋到的，統一回覆 NOT_FOUND ＊是全部
 app.all('*', (req, res) => {

@@ -5,7 +5,17 @@ const messageBoardSchema = new mongoose.Schema({
   userId: {
     type: mongoose.ObjectId,
     ref: 'users',
-    required: [true, '缺少使用者id']
+    required: [true, '缺少使用者ID']
+  },
+  userName: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者']
+  },
+  avatar: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者大頭貼']
   },
   message: {
     type: String,
@@ -17,7 +27,17 @@ const schema = new mongoose.Schema({
   userId: {
     type: mongoose.ObjectId,
     ref: 'users',
-    default: []
+    required: [true, '缺少使用者ID']
+  },
+  userName: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者']
+  },
+  userAvatar: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者大頭貼']
   },
   // 類別
   theme: {
@@ -43,10 +63,6 @@ const schema = new mongoose.Schema({
   },
   imgURL: {
     type: String
-  },
-  date: {
-    type: Date,
-    required: [true, '必須要有時間']
   },
   join: {
     type: [mongoose.ObjectId],
