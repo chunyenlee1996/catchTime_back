@@ -32,3 +32,19 @@ export const create = async (req, res) => {
     }
   }
 }
+
+export const getAll = async (req, res) => {
+  try {
+    const result = await PTTs.find({ theme: req.query.theme })
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '',
+      result
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: '發生錯誤'
+    })
+  }
+}
