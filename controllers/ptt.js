@@ -9,7 +9,7 @@ export const create = async (req, res) => {
       userName: req.user.userName,
       userAvatar: req.user.avatar,
       head: req.body.head,
-      connect: req.body.connect,
+      content: req.body.content,
       theme: req.body.theme,
       imgURL: req.file?.path
     })

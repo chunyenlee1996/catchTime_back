@@ -53,7 +53,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, '填寫標題']
   },
-  connect: {
+  content: {
     type: String,
     required: [true, '還未寫內容']
   },
