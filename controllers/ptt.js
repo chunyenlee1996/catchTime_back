@@ -48,3 +48,28 @@ export const getAll = async (req, res) => {
     })
   }
 }
+
+export const upDateMessageBoard = async (req, res) => {
+  try {
+    if (!req.params.id) throw new Error('NotFound')
+    const result = await PTTs.findById(req.params.id)
+    result.messageBoard.push({
+      userId: req.user._id,
+      userName: req.user.userName,
+      avatar: req.user.avatar,
+      message: req.body.message
+    })
+    await result.save()
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: ''
+    })
+  } catch (error) {
+    if (error.name === 'NotFound') {
+      res.status(StatusCodes.NOT_FOUND).json({
+        success: true,
+        message: '找不到討論版'
+      })
+    }
+  }
+}
