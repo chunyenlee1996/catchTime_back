@@ -1,6 +1,24 @@
 //  mongoDB 的語法轉換套件
 import mongoose from 'mongoose'
 
+const whoJoin = new mongoose.Schema({
+  userId: {
+    type: mongoose.ObjectId,
+    ref: 'users',
+    required: [true, '缺少使用者ID']
+  },
+  userName: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者名稱']
+  },
+  userEmail: {
+    type: String,
+    ref: 'users',
+    required: [true, '缺少使用者信箱']
+  }
+})
+
 const schema = new mongoose.Schema({
   userId: {
     type: mongoose.ObjectId,
@@ -37,14 +55,17 @@ const schema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    required: [true, '未填寫日期']
+  },
+  time: {
+    type: Date,
     required: [true, '未填寫時間']
   },
   imgURL: {
     type: String
   },
   join: {
-    type: Array,
-    ref: 'users',
+    type: whoJoin,
     default: []
   }
 }, { versionKey: false })
