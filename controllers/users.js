@@ -117,7 +117,9 @@ export const getProfile = async (req, res) => {
         phoneNumber: req.user.phoneNumber,
         role: req.user.role,
         avatar: req.user.avatar,
-        userId: req.user._id
+        userId: req.user._id,
+        aboutMe: req.user.aboutMe,
+        mainImg: req.user.mainImg
       }
     })
   } catch (error) {
@@ -125,5 +127,45 @@ export const getProfile = async (req, res) => {
       success: false,
       message: '發生錯誤'
     })
+  }
+}
+
+// 放使用者自我介紹
+export const aboutMe = async (req, res) => {
+  try {
+    const result = await users.findByIdAndUpdate({ _id: req.params.id }, {
+      aboutMe: req.body.aboutMe,
+      mainImg: req.file?.path
+      // 設定 new: true 他才會傳新的東西過來，runValidators: true 驗證才會執行
+    }, { new: true, runValidators: true })
+    if (result) {
+      res.status(StatusCodes.OK).json({
+        success: true,
+        message: '',
+        result
+      })
+    }
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: getMessageFromValidationError(error)
+      })
+    } else if (error.name === 'CastError') {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        success: false,
+        message: '格式錯誤'
+      })
+    } else if (error.message === 'NOT FOUND') {
+      res.status(StatusCodes.NOT_FOUND).json({
+        success: false,
+        message: '找不到'
+      })
+    } else {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        message: '發生錯誤'
+      })
+    }
   }
 }

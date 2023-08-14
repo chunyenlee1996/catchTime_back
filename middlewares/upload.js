@@ -33,9 +33,11 @@ const upload = multer({
 })
 
 export default (req, res, next) => {
+  // 這邊的 imgURL 要跟前端傳進來的欄位名稱一樣
   upload.single('imgURL')(req, res, error => {
     if (error instanceof multer.MulterError) {
       // 處理上傳錯誤
+      console.log(error)
       let message = '上傳錯誤'
       if (error.code === 'LIMIT_FILE_SIZE') {
         message = '檔案太大'

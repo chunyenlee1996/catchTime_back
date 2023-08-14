@@ -53,6 +53,14 @@ const schema = new mongoose.Schema({
       return `https://source.boringavatars.com/beam/250/${this.account}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51`
     }
   },
+  aboutMe: {
+    type: String,
+    default: '來介紹自己吧~'
+  },
+  mainImg: {
+    type: String,
+    default: 'https://github.com/chunyenlee1996.png'
+  },
   // role 角色（這邊指是否為管理員）
   // enum 列舉，先定義好什麼代表什麼，可以增加可讀性，像是鍵盤 'A','S','D','W'，將 'A' 定義為左，就可以在這邊直接寫左，會比寫 'A' 的可讀性高
   role: {
@@ -96,7 +104,7 @@ schema.pre('save', function (next) {
       error.addError('password', new mongoose.Error.ValidatorError({ message: '密碼太短' }))
       next(error)
       return
-    // 判斷密碼長度有沒有大於 20
+      // 判斷密碼長度有沒有大於 20
     } else if (user.password.length > 20) {
       const error = new mongoose.Error.ValidationError(null)
       error.addError('password', new mongoose.Error.ValidatorError({ message: '密碼太長' }))
