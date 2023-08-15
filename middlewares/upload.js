@@ -28,7 +28,7 @@ const upload = multer({
   },
   limits: {
     // 限制檔案大小，超過會出現 LIMIT_FILE_SIZE 錯誤
-    fileSize: 5464 * 8192
+    fileSize: 1024 * 1024
   }
 })
 
