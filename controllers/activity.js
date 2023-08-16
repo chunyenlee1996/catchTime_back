@@ -107,7 +107,26 @@ export const getUserActivity = async (req, res) => {
     // 找自己參加的
     // const result = await activity.find({ join: req.user._id })
     // 找自己辦的含參與者
-    const result = await activity.find({ userId: req.user._id }).populate('join', 'account avatar')
+    const result = await activity.find({ userId: req.user._id }).populate('join', 'account email')
+    res.status(StatusCodes.OK).json({
+      success: true,
+      message: '',
+      result
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: '使用者圖片取得發生錯誤'
+    })
+  }
+}
+export const getUserJoinActivity = async (req, res) => {
+  try {
+    // .find( mongoDB 資料庫的 key : key 的 value )
+    // 找自己參加的
+    const result = await activity.find({ join: req.user._id })
+    // 找自己辦的含參與者
+    // const result = await activity.find({ userId: req.user._id }).populate('join', 'account email')
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
