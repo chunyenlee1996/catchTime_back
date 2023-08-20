@@ -41,7 +41,7 @@ export const getAll = async (req, res) => {
         // new RegExp() 是正則表達式的語法，console.log()留在下面可以看
         { theme: new RegExp(req.query.theme, 'i') },
         { userName: new RegExp(req.query.search, 'i') },
-        { name: new RegExp(req.query.search, 'i') }
+        { head: new RegExp(req.query.search, 'i') }
       ]
     })
     res.status(StatusCodes.OK).json({
