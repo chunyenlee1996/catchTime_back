@@ -35,6 +35,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, '未填活動內容']
   },
+  address: {
+    type: String,
+    required: [true, '未填地點']
+  },
   date: {
     type: Date,
     required: [true, '未填寫日期']

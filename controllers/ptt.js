@@ -44,6 +44,7 @@ export const getAll = async (req, res) => {
         { head: new RegExp(req.query.search, 'i') }
       ]
     })
+    console.log(new RegExp(req.query.theme, 'i'))
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',

@@ -87,7 +87,7 @@ export const removeJoinActivity = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    const result = await activity.find({ theme: req.query.theme })
+    const result = await activity.find()
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',
