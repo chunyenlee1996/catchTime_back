@@ -39,12 +39,16 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, '未填地點']
   },
+  mainURL: {
+    type: String
+  },
   date: {
     type: Date,
     required: [true, '未填寫日期']
   },
   imgURL: {
-    type: String
+    type: String,
+    default: 'https://res.cloudinary.com/djjixkg5i/image/upload/v1692752651/vgvxfdfhhobhtxjlvf1u.jpg'
   },
   join: {
     type: [mongoose.ObjectId],

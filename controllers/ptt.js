@@ -36,15 +36,16 @@ export const create = async (req, res) => {
 export const getAll = async (req, res) => {
   try {
     const result = await PTTs.find({
+      theme: new RegExp(req.query.theme, 'i'),
       // $or:[] 這個是其中一個的語法，要是陣列，裡面物件表示
       $or: [
         // new RegExp() 是正則表達式的語法，console.log()留在下面可以看
-        { theme: new RegExp(req.query.theme, 'i') },
         { userName: new RegExp(req.query.search, 'i') },
         { head: new RegExp(req.query.search, 'i') }
       ]
     })
     console.log(new RegExp(req.query.theme, 'i'))
+    console.log(new RegExp(req.query.search, 'i'))
     res.status(StatusCodes.OK).json({
       success: true,
       message: '',

@@ -12,6 +12,8 @@ export const create = async (req, res) => {
       head: req.body.head,
       content: req.body.content,
       date: req.body.date,
+      address: req.body.address,
+      mainURL: req.body?.mainURL,
       imgURL: req.file?.path
     })
     res.status(StatusCodes.OK).json({
