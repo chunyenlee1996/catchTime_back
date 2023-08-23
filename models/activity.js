@@ -40,7 +40,8 @@ const schema = new mongoose.Schema({
     required: [true, '未填地點']
   },
   mainURL: {
-    type: String
+    type: String,
+    default: ''
   },
   date: {
     type: Date,
